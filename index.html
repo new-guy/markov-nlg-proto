@@ -4,21 +4,39 @@
 	<link rel="stylesheet" href="css/pure-min.css">
 </head>
 <body>
+	<style>
+		.pure-button
+		{
+			width:85%;
+			word-wrap: break-word;
+		}
+	</style>
 	<div class="pure-g">
 		<div class="pure-u-1-5"></div>
 		<div class="pure-u-3-5">
 			<div class="pure-g">
 				<div class="pure-u-1-12"></div>
 				<div class="pure-u-5-12">
-					<button id="btn1" class="pure-button">Button Num 1</button>
+					<p id="phrase1"></p>
+					<button id="btn1" class="pure-button" onclick="evalButtonPress(1)">Phrase 1</button>
 				</div>
 				<div class="pure-u-5-12">
-					<button id="btn2" class="pure-button">Button Num 2</button>
+					<p id="phrase2"></p>
+					<button id="btn2" class="pure-button" onclick="evalButtonPress(2)">Phrase 2</button>
 				</div>
 				<div class="pure-u-1-12"></div>
 			</div>
 		</div>
 		<div class="pure-u-1-5"></div>
+	</div>
+	<div class="pure-g">
+		<div class="pure-u-2-5"></div>
+		<div class="pure-u-1-5">
+			<p id="score" count="0">Score: </p>
+			<p id="guesscounter" count="0">Guesses: </p>
+			<p id="previousguess"></p>
+		</div>
+		<div class="pure-u-2-5"></div>
 	</div>
 	<script src="js/markovrewrite.js"></script>
 </body>
