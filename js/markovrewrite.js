@@ -109,7 +109,7 @@ function getMarkovChainFromHumanPhrases()
 {
 	var terminals = {};
 	var startwords = [];
-	var wordstats = {};
+	var corewords = {};
 
 	var phrases = getAllPhrases();
 
@@ -121,13 +121,13 @@ function getMarkovChainFromHumanPhrases()
 
 		for(var j = 0; j < words.length; j++)
 		{
-			if(wordstats.hasOwnProperty(words[j]))
+			if(corewords.hasOwnProperty(words[j]))
 			{
-				wordstats[words[j]].push(words[j+1]);
+				corewords[words[j]].push(words[j+1]);
 			}
 			else
 			{
-				wordstats[words[j]] = [words[j+1]];
+				corewords[words[j]] = [words[j+1]];
 			}
 		}
 	}
@@ -136,9 +136,46 @@ function getMarkovChainFromHumanPhrases()
 
 	markovChain.terminals = terminals;
 	markovChain.startwords = startwords;
-	markovChain.wordstats = wordstats;
+	markovChain.corewords = corewords;
 
 	return markovChain;
+}
+
+function addPhraseToMarkovChain(phrase, chain)
+{
+	var words_from_phrase = phrase.split(' ');
+
+	if(chainIsNotValid(chain))
+	{
+		chain.terminals = new Object();
+		chain.startwords = [];
+		chain.corewords = new Object();
+	}
+
+	chain.terminals[words_from_phrase[words_from_phrase.length-1]] = true; //The final word in the phrase is a terminal
+	chain.startwords.push(words_from_phrase[0]);
+
+	for(var i = 0; i < words_from_phrase.length; i++)
+	{
+		var working_word = words_from_phrase[i];
+		var next_word = words_from_phrase[i+1];
+
+		if(chain.corewords.hasOwnProperty(working_word))
+		{
+			chain.corewords[working_word].push(next_word);
+		}
+		else
+		{
+			chain.corewords[working_word] = [next_word];
+		}
+	}
+
+	return chain;
+}
+
+function chainIsNotValid(chain)
+{
+	return (typeof chain.terminals == "undefined" || typeof chain.corewords == "undefined" || typeof chain.startwords == "undefined");
 }
 
 /* PHRASE GENERATOR */
@@ -154,9 +191,9 @@ var getAlgorithmPhrase = function(min_length, active_chain)
 	var word = choice(active_chain.startwords);
 	var title = [word];
 
-	while(active_chain.wordstats.hasOwnProperty(word))
+	while(active_chain.corewords.hasOwnProperty(word))
 	{
-		var next_words = active_chain.wordstats[word];
+		var next_words = active_chain.corewords[word];
 		word = choice(next_words);
 		title.push(word);
 		if(title.length > min_length && active_chain.terminals.hasOwnProperty(word)) break;
