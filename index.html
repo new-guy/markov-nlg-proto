@@ -12,7 +12,9 @@
 		}
 	</style>
 	<div class="pure-g">
-		<div class="pure-u-1-5"></div>
+		<div class="pure-u-1-5">
+			<button type="button" class="pure-button" onclick="setupNewRound()">New Round</button>
+		</div>
 		<div class="pure-u-3-5">
 			<div class="pure-g">
 				<div class="pure-u-1-12"></div>
@@ -49,7 +51,7 @@
 			<form class="pure-form pure-form-stacked">
 				<fieldset>
 					<input id="submittext" type="text" placeholder="Chain">
-					<button type="button" class="pure-button" onclick="addPhraseToMarkovChain($('#submittext').val(), static_markov_chain);">Submit Phrase</button>
+					<button type="button" class="pure-button" onclick="addPhraseToMarkovChain($('#submittext').val(), static_markov_chain); submitted_phrases.push($('#submittext').val());">Submit Phrase</button>
 				</fieldset>
 			</form>
 		</div>

@@ -4,6 +4,7 @@ var human_phrase_dataset = ["meet me at market square", "let me know if that wil
 
 //var static_markov_chain = getMarkovChainFromHumanPhrases();
 static_markov_chain = new Object();
+var submitted_phrases = [];
 
 function initPage()
 {
