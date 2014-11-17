@@ -45,7 +45,14 @@
 			<p id="guesscounter" count="0">Guesses: </p>
 			<p id="previousguess"></p>
 		</div>
-		<div class="pure-u-2-5"></div>
+		<div class="pure-u-2-5">
+			<form class="pure-form pure-form-stacked">
+				<fieldset>
+					<input id="submittext" type="text" placeholder="Chain">
+					<button type="button" class="pure-button" onclick="addPhraseToMarkovChain($('#submittext').val(), static_markov_chain);">Submit Phrase</button>
+				</fieldset>
+			</form>
+		</div>
 	</div>
 	<script src="js/markovrewrite.js"></script>
 </body>

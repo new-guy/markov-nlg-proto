@@ -2,7 +2,8 @@
 var human_phrase_dataset = ["meet me at market square", "let me know if that will work for you", "we don't want the game to last too long", "we'll have some drinks", "I'm back in Durham tomorrow", "I will come up and visit", "I have a sick blow up bed", "we can sit together", "no girls around", "it will start slowly", "no girls allowed", "I hope people remember this", "I sure as shit will remember this", "this has nothing to do with politics", "It's pretty fantastic", "It does give you powerful tools", "the tutorial doesn't seem that bad", "explain why all of these things are on the screen", "visit when it is time to visit", "this phrase was made by a human", "this phrase was not made by a human", "hopefully people will read this", "please help I'm trapped in the computer", "this one was written by the algorithm", "I am staying at Subodha's tonight", "it is dangerous to wear blue", "it can be scary outside at night", "it is starting to get a bit dark", "the walls around me are white", "I have a chicago bears hat to my right", "hopefully this will be enough", "I am not sure how many phrases will be needed", "We can try using thirty five", "Although I am not sure how much these will line up", "I need an algorithm for rendering the chain visually"];
 /* VIEW CONTROLLER */
 
-var static_markov_chain = getMarkovChainFromHumanPhrases();
+//var static_markov_chain = getMarkovChainFromHumanPhrases();
+static_markov_chain = new Object();
 
 function initPage()
 {
@@ -45,6 +46,7 @@ function evalButtonPress(num)
 	else
 	{
 		$("#previousguess").text("Wrong!");
+		addPhraseToMarkovChain($("#phrase"+num).text(), static_markov_chain);
 	}
 
 	var guess_count = parseInt($("#guesscounter").attr("count")) + 1;
@@ -208,7 +210,7 @@ var getAlgorithmPhrase = function(min_length, active_chain)
 		title.push(word);
 		if(title.length > min_length && active_chain.terminals.hasOwnProperty(word)) break;
 	}
-	if (title.length < min_length) return getAlgorithmPhrase(min_length);
+	if (title.length < min_length) return getAlgorithmPhrase(min_length, active_chain);
 	return title.join(' ');
 }
 
