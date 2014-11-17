@@ -55,6 +55,16 @@ function evalButtonPress(num)
 	setupNewRound();
 }
 
+function importChain()
+{
+	static_markov_chain = JSON.parse($("#chaintext").val());
+}
+
+function exportChain()
+{
+	$("#chaintext").val(JSON.stringify(static_markov_chain));
+}
+
 /* HUMAN PHRASE DATASET LIASON */
 
 function getSinglePhrase()

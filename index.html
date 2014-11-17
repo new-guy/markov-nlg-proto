@@ -5,7 +5,7 @@
 </head>
 <body>
 	<style>
-		.pure-button
+		.phrase-button
 		{
 			width:85%;
 			word-wrap: break-word;
@@ -18,19 +18,28 @@
 				<div class="pure-u-1-12"></div>
 				<div class="pure-u-5-12">
 					<p id="phrase1"></p>
-					<button id="btn1" class="pure-button" onclick="evalButtonPress(1)">Phrase 1</button>
+					<button id="btn1" class="pure-button phrase-button" onclick="evalButtonPress(1)">Phrase 1</button>
 				</div>
 				<div class="pure-u-5-12">
 					<p id="phrase2"></p>
-					<button id="btn2" class="pure-button" onclick="evalButtonPress(2)">Phrase 2</button>
+					<button id="btn2" class="pure-button phrase-button" onclick="evalButtonPress(2)">Phrase 2</button>
 				</div>
 				<div class="pure-u-1-12"></div>
 			</div>
 		</div>
 		<div class="pure-u-1-5"></div>
 	</div>
+	<br>
 	<div class="pure-g">
-		<div class="pure-u-2-5"></div>
+		<div class="pure-u-2-5">
+			<form class="pure-form pure-form-stacked">
+				<fieldset>
+					<input id="chaintext" type="text" placeholder="Chain">
+					<button type="button" class="pure-button" onclick="importChain()">Import</button>
+					<button type="button" class="pure-button" onclick="exportChain()">Export</button>
+				</fieldset>
+			</form>
+		</div>
 		<div class="pure-u-1-5">
 			<p id="score" count="0">Score: </p>
 			<p id="guesscounter" count="0">Guesses: </p>
