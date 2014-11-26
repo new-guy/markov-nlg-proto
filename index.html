@@ -51,11 +51,11 @@
 			<form class="pure-form pure-form-stacked">
 				<fieldset>
 					<input id="submittext" type="text" placeholder="Chain">
-					<button type="button" class="pure-button" onclick="addPhraseToMarkovChain($('#submittext').val(), static_markov_chain); submitted_phrases.push($('#submittext').val());">Submit Phrase</button>
+					<button type="button" class="pure-button" onclick="addPhraseToMarkovChain($('#submittext').val(), static_markov_chain); human_phrase_dataset.push($('#submittext').val());">Submit Phrase</button>
 				</fieldset>
 			</form>
 		</div>
 	</div>
-	<script src="js/markovrewrite.js"></script>
+	<script src="js/markov.js"></script>
 </body>
 </html>
