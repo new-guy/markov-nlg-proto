@@ -62,6 +62,24 @@ function evalButtonPress(num)
 	setupNewRound();
 }
 
+function evalTie()
+{
+	var ai_phrase = "";
+
+	if($("#btn1").attr("human") == "true")
+	{
+		ai_phrase = $("#phrase1").text();
+	}
+	else
+	{
+		ai_phrase = $("#phrase2").text();
+	}
+
+	if(AI_SHOULD_LEARN) addPhraseToMarkovChain(ai_phrase, static_markov_chain);
+
+	setupNewRound();
+}
+
 function importChain()
 {
 	static_markov_chain = JSON.parse($("#chaintext").val());
@@ -69,7 +87,7 @@ function importChain()
 
 function exportChain()
 {
-	$("#chaintext").val(JSON.stringify(static_markov_chain));
+	console.log(JSON.stringify(static_markov_chain));
 }
 
 /* HUMAN PHRASE DATASET LIASON */
@@ -203,20 +221,20 @@ var choice = function(array)
 	return array[i];
 };
 
-var getAlgorithmPhrase = function(min_length, active_chain)
+var getAlgorithmPhrase = function(min_length, working_chain)
 {
-	var word = choice(active_chain.startwords);
-	var title = [word];
+	var word = choice(working_chain.startwords);
+	var phrase = [word];
 
-	while(active_chain.corewords.hasOwnProperty(word))
+	while(working_chain.corewords.hasOwnProperty(word))
 	{
-		var next_words = active_chain.corewords[word];
+		var next_words = working_chain.corewords[word];
 		word = choice(next_words);
-		title.push(word);
-		if(title.length > min_length && active_chain.terminals.hasOwnProperty(word)) break;
+		phrase.push(word);
+		if(phrase.length > min_length && working_chain.terminals.hasOwnProperty(word)) break;
 	}
-	if (title.length < min_length) return getAlgorithmPhrase(min_length, active_chain);
-	return title.join(' ');
+	if (phrase.length < min_length) return getAlgorithmPhrase(min_length, working_chain);
+	return phrase.join(' ');
 }
 
 
