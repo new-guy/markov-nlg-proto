@@ -1,0 +1,26 @@
+<html>
+<head>
+	<script src="js/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<button type="button" onclick="scrapeTweets()">Scrape Tweets</button>
+
+	<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/hashtag/chibears" data-widget-id="538323168625426432">#chibears Tweets</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+	<script>
+		function scrapeTweets()
+		{
+			var tweets = $('#twitter-widget-0').contents().find('.e-entry-title');
+			var text = "";
+
+			for(var i = 0; i < tweets.length; i++)
+			{
+				text += tweets[i].innerText + "\n";
+			}
+
+			console.log(text);
+		}
+	</script>
+</body>
+</html>
